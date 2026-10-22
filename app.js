@@ -23,6 +23,11 @@
     $('storage-extra').textContent = storageOK ? '' : '현재 자동 저장이 안 돼요. 이동하기 전에 기록을 복사해 주세요.';
   }
   function field(key, title, placeholder = '', hint = '', short = false) {
+    const classes = Object.keys(window.HACKATHON_CONFIG?.padletClassLinks || {});
+    if (key === 'className' && classes.length) {
+      const options = [...new Set([...classes, ...(v(key) && !classes.includes(v(key)) ? [v(key)] : [])])];
+      return `<label class="field"><span class="field-title">${title}<span class="field-hint">우리 반을 선택해요. 제출 링크도 함께 바뀌어요.</span></span><select data-field="className"><option value="">반을 선택해요</option>${options.map(name => `<option value="${esc(name)}" ${v(key) === name ? 'selected' : ''}>${esc(name)}</option>`).join('')}</select></label>`;
+    }
     return `<label class="field"><span class="field-title">${title}${hint ? `<span class="field-hint">${hint}</span>` : ''}</span>${short ? `<input type="text" maxlength="100" data-field="${key}" value="${esc(v(key))}" placeholder="${esc(placeholder)}">` : `<textarea data-field="${key}" maxlength="700" placeholder="${esc(placeholder)}">${esc(v(key))}</textarea>`}</label>`;
   }
   function check(key, text) { return `<label class="check"><input type="checkbox" data-check="${key}" ${state.checks[key] ? 'checked' : ''}><span>${text}</span></label>`; }
@@ -76,28 +81,28 @@
         <details><summary>요청문에 빈칸이 남았나요?</summary><p id="missing-fields"></p><p>앞 단계의 사용자·문제·변화·해결 방법도 요청문에 들어가요. 빈 내용은 이전 단계에서 채워요. 예시를 그대로 따를 필요는 없어요.</p></details>
         <h3>우리의 Canva 요청문</h3><p class="small">위 내용을 바꾸면 아래 문장도 함께 바뀌어요. 괄호가 남아 있으면 짝과 더 정해요.</p>
         <textarea id="prompt-text" class="prompt" readonly aria-label="완성된 Canva 요청문">${esc(prompt())}</textarea>
-        <div class="actions"><button class="button primary" data-copy="prompt">요청문 복사</button><button class="button secondary" id="share-prompt">공유 메뉴 열기 ↗</button></div>
-        <p class="note"><strong>2번 아이패드로 보내요.</strong> 복사 → Teams에서 짝에게 메시지로 보내기 → 짝이 받은 글 복사. 또는 공유 메뉴에서 메시지·AirDrop을 선택해요. 기기 설정에 따라 보이는 앱은 달라요.</p>
+        <div class="actions"><button class="button primary" data-copy="prompt">요청문 복사</button></div>
+        <div class="note"><strong>2번 아이패드로 보내는 방법은 두 가지예요.</strong><ol><li><strong>아이패드 메시지:</strong> 복사한 요청문을 메시지 앱에 붙여 넣고 조원에게 보내요.</li><li><strong>아이패드 메모 + AirDrop:</strong> 메모 앱에 요청문을 붙여 넣고, 공유에서 <strong>사본 보내기 → AirDrop</strong>으로 조원에게 보내요. 받은 메모에서 글을 복사해요.</li></ol></div>
         ${check('prompt-reviewed','모든 팀원이 요청문을 읽고, 버튼과 결과가 분명한지 확인했어요.')}
         ${check('prompt-sent','2번 아이패드에서 요청문을 받았어요.')}
         <p class="talk">짝이 사용자가 되어 순서를 말해 보고, 기록한 학생이 예상 결과를 설명해요. 이제 1차시가 끝나요!</p>`;
       case 5: return `<div class="note"><strong>2차시 시작!</strong> 2번 아이패드에서 만들고, <strong>1번 아이패드에서 시험해요.</strong> 결과는 팀원 모두 함께 판단해요.</div>
         <div class="card canva-location"><h3>Canva AI는 어디에 있나요?</h3><p><strong>Safari로 Canva를 열었다면</strong><br>Canva 홈의 <strong>왼쪽 메뉴 → Canva AI</strong>를 찾아요. 보이지 않으면 <strong>더 보기(More)</strong> 안을 확인해요.</p><p><strong>Canva 앱을 열었다면</strong><br>홈 화면의 <strong>아래쪽 메뉴 → Canva AI</strong>를 찾아요. 없으면 <strong>더 보기(… / More)</strong>를 눌러요.</p><p>Canva AI의 요청문 입력창에서 <strong>코드(&lt;/&gt; Code)</strong>를 선택해요. 홈에 <strong>Code(코드)</strong>가 바로 보이면 그 버튼으로 시작해도 좋아요.</p><p class="small">편집 화면에 있다면 먼저 홈으로 돌아와요. 화면 모양은 계정·버전에 따라 다를 수 있어요. 메뉴가 계속 없으면 선생님께 보여 드려요.</p></div>
-        <ol class="instruction"><li>2번 아이패드의 Teams·메시지에서 받은 요청문을 복사해요.</li><li>학교에서 준비한 계정으로 Canva를 열고, 위 안내대로 <strong>Canva AI → 코드</strong>로 들어가요.</li><li>요청문을 붙여 넣고 보내요. 기다리는 동안 성공 기준을 함께 읽어요.</li><li>미리보기가 나오면 디자인 이름을 <strong>팀 이름_도구 이름</strong>으로 정해요.</li><li>실명·사진·연락처가 없는지 확인하고, 선생님 안내에 따라 <strong>웹사이트로 게시</strong>해요.</li><li><strong>게시된 실행 링크</strong>를 복사해 Teams·메시지로 1번에게 보내요. 편집용 링크는 보내지 않아요.</li></ol>
+        <ol class="instruction"><li>2번 아이패드의 메시지 또는 AirDrop으로 받은 메모에서 요청문을 복사해요.</li><li>학교에서 준비한 계정으로 Canva를 열고, 위 안내대로 <strong>Canva AI → 코드</strong>로 들어가요.</li><li>요청문을 붙여 넣고 보내요. 기다리는 동안 성공 기준을 함께 읽어요.</li><li>미리보기가 나오면 디자인 이름을 <strong>팀 이름_도구 이름</strong>으로 정해요.</li><li>실명·사진·연락처가 없는지 확인하고, 선생님 안내에 따라 <strong>웹사이트로 게시</strong>해요.</li><li><strong>게시된 실행 링크</strong>를 복사해 메시지 또는 메모 사본 AirDrop로 1번에게 보내요. 편집용 링크는 보내지 않아요.</li></ol>
         <a class="button primary" href="https://www.canva.com/" target="_blank" rel="noopener noreferrer">Canva 열기 ↗</a>
         <details><summary>Canva가 질문하면 어떻게 답하나요?</summary><p>짝과 먼저 이야기하고, 앞에서 정한 기준으로 답해요. 기능이 너무 많아지면 “오늘은 핵심 기능 하나만 만들어 줘”라고 말해요.</p></details>
         <details><summary>코드 메뉴가 없거나 생성이 안 돼요</summary><p>선생님께 화면을 보여 드려요. 계정의 권한·사용량을 확인해야 할 수 있어요. 기다리면서 입력·버튼·결과 화면을 종이에 그려도 좋아요. 요청을 여러 번 연속으로 보내지 않아요.</p></details>
         ${check('generated','2번 아이패드에서 도구를 만들고 게시했어요.')}${check('test-link-sent','게시된 실행 링크를 1번 아이패드로 보냈어요.')}${talk('처음 생각과 다르게 나온 부분은 어디인가요?')}`;
       case 6: return `<div class="note"><strong>시험은 1번 아이패드에서 해요.</strong> 2번 아이패드는 Canva에서 고칠 때 사용해요. 안내 웹은 닫지 않고, 받은 실행 링크를 새 탭에서 열어요.</div>
-        <ol class="instruction"><li><strong>1번 아이패드</strong>에서 Teams·메시지로 받은 실행 링크를 열어요.</li><li>아래 성공 기준대로 직접 눌러 보고, 실제 결과를 살펴봐요.</li><li>이 안내 웹의 탭으로 돌아와 결과와 고칠 점을 적어요.</li><li>고칠 요청을 2번에게 보내요. 2번이 Canva에서 수정하고 <strong>게시 내용을 갱신</strong>한 뒤 실행 링크를 다시 보내요.</li><li>1번 아이패드에서 받은 링크를 다시 열거나 새로고침하고, 같은 순서로 재시험해요.</li></ol>
+        <ol class="instruction"><li><strong>1번 아이패드</strong>에서 메시지 또는 메모 사본 AirDrop로 받은 실행 링크를 열어요.</li><li>아래 성공 기준대로 직접 눌러 보고, 실제 결과를 살펴봐요.</li><li>이 안내 웹의 탭으로 돌아와 결과와 고칠 점을 적어요.</li><li>고칠 요청을 2번에게 보내요. 2번이 Canva에서 수정하고 <strong>게시 내용을 갱신</strong>한 뒤 실행 링크를 다시 보내요.</li><li>1번 아이패드에서 받은 링크를 다시 열거나 새로고침하고, 같은 순서로 재시험해요.</li></ol>
         <div class="card"><span class="tag">우리의 성공 기준</span><p>${esc(v('test') || '5단계에서 시험할 순서를 적어 주세요.')}</p></div>
         ${discussion(`${isThree() ? '3번이 1번과 함께 1번 아이패드에서' : '1번이 자기 아이패드에서'} 성공 기준대로 직접 눌러 봐요.`,'2번은 사용자가 실제로 어떻게 쓰는지 보고 예상과 비교해요.','고칠 점 하나를 정하고 1번 아이패드에서 다시 시험해요.')}
         ${field('actual','직접 시험하니 어떤 일이 일어났나요?','예: 완료를 눌러도 첫 할 일만 계속 보여요. 예상과 같았다면 무엇이 같았는지 적어요.')}
         ${field('fix','무엇 하나를 어떻게 고칠까요?','예: [완료]를 누르면 다음 할 일로 넘어가게 고쳐 줘. 다른 기능은 그대로 둬.')}
         <div class="actions"><button class="button secondary" data-copy="fix">고치기 요청 복사</button></div>
-        <p class="small">복사한 문장은 Teams·메시지로 2번에게 전달해요. 2번은 Canva의 같은 대화에서 고치고, 수정 사항을 다시 게시해요. 잘 작동하면 기능을 더 넣지 않아도 괜찮아요.</p>
+        <p class="small">복사한 문장은 메시지 또는 메모 사본 AirDrop로 2번에게 전달해요. 2번은 Canva의 같은 대화에서 고치고, 수정 사항을 다시 게시해요. 잘 작동하면 기능을 더 넣지 않아도 괜찮아요.</p>
         ${check('tested','1번 아이패드에서 실행 링크를 열고 성공 기준대로 시험했어요.')}${check('retested','고쳤다면 2번이 다시 게시하고 1번 아이패드에서 재시험했어요. 또는 고칠 필요가 없었어요.')}${check('readable','1번 아이패드에서 글씨와 버튼이 잘 보이고 눌려요.')}`;
-      case 7: return `<div class="note"><strong>Padlet 게시도 1번 아이패드에서 해요.</strong> 제목에는 <strong>반과 팀 이름</strong>만 적어요. <strong>이름과 출석번호는 넣지 않아요.</strong></div><ol class="instruction"><li>1번 아이패드에서 시험한 최종 링크를 준비해요. 2번이 더 고쳤다면 다시 게시한 뒤 1번에서 재시험해요.</li><li>Padlet에 새 게시물을 열고, 아래 <strong>제목 복사</strong>로 반·팀 이름을 제목 칸에 붙여 넣어요.</li><li><strong>웹앱 링크 복사</strong>로 Canva에서 만든 게시 주소를 Padlet의 링크 첨부에 넣어요. 편집용 주소는 넣지 않아요.</li><li>아래 <strong>내용 복사</strong>를 눌러 1번 아이패드에 모인 활동 내용을 Padlet의 내용 칸에 붙여 넣어요.</li><li>팀원과 제목·링크·내용을 확인한 뒤 게시해요.</li></ol>
+      case 7: return `<div class="note"><strong>Padlet 게시도 1번 아이패드에서 해요.</strong> 제목에는 <strong>반과 팀 이름</strong>만 적어요. <strong>이름과 출석번호는 넣지 않아요.</strong></div><ol class="instruction"><li>1번 아이패드에서 시험한 최종 링크를 준비해요. 2번이 더 고쳤다면 다시 게시한 뒤 1번에서 재시험해요.</li><li>아래에서 우리 반을 확인하고 <strong>우리 반 제출 양식 링크</strong>로 들어가요. 제출 양식에서 아래 <strong>제목 복사</strong>로 반·팀 이름을 제목 칸에 붙여 넣어요.</li><li><strong>웹앱 링크 복사</strong>로 Canva에서 만든 게시 주소를 Padlet의 링크 첨부에 넣어요. 편집용 주소는 넣지 않아요.</li><li>아래 <strong>내용 복사</strong>를 눌러 1번 아이패드에 모인 활동 내용을 Padlet의 내용 칸에 붙여 넣어요.</li><li>우리 반 섹션인지, 제목·링크·내용이 맞는지 팀원과 확인한 뒤 게시해요.</li></ol>
         <h3>① 제목 · 반과 팀 이름</h3>
         ${field('className','우리 반','예: 5학년 1반','이름과 출석번호는 넣지 않아요.',true)}
         ${field('team','우리 팀 이름','예: 초록 톱니','모두 함께 정한 팀 이름만 적어요.',true)}
@@ -111,29 +116,44 @@
         ${field('description','Padlet에 넣을 웹앱 설명','누구를 위한 도구이며, 어떻게 쓰면 무엇을 도와주나요?','5단계에서 쓴 설명이에요. 실제 완성된 모습에 맞게 고쳐도 좋아요.')}
         ${check('safe','제목과 내용에 이름·출석번호·사진·연락처가 없는지 확인했어요.')}${check('link-tested','1번 아이패드에서 최종 게시 주소를 열고 직접 눌러 봤어요.')}
         <p>앞에서 이야기하고 기록한 내용이 아래에 모였어요. 복사해 Padlet의 <strong>내용 칸</strong>에 붙여 넣어요.</p><textarea id="padlet-text" class="prompt" readonly aria-label="Padlet 내용">${esc(padletText())}</textarea>
-        <div class="actions"><button class="button primary" data-copy="padlet">내용 복사</button>${padletLink()}</div>
+        <div class="actions"><button class="button primary" data-copy="padlet">내용 복사</button><span id="padlet-class-link">${padletLink()}</span></div>
+        <h3>④ 선생님이 공개하면 · 우리 반 작품 감상</h3>
+        <p class="note">제출 중에는 다른 팀의 글이 보이지 않아요. 선생님이 공개를 안내하면 우리 반 소회의실에서 친구의 작품을 살펴봐요. 직접 써 보고 댓글로 좋은 점과 궁금한 점을 남기거나 좋아요를 눌러요.</p>
+        <p class="small">작품 감상 링크는 선생님이 따로 안내해요.</p>
+        ${padletViewLink()}
         <p class="small">Padlet에 글을 올리는 것은 직접 해요. 이 웹에서 자동으로 게시하지 않아요.</p>
         <details><summary>게시가 안 되면요?</summary><p>선생님께 요청해요. 개인정보 없는 화면과 “이렇게 움직이게 만들고 싶었어요”라는 설명으로 나눠도 괜찮아요. 편집 권한이 있는 링크를 대신 공개하지 않아요.</p></details>
-        ${talk('다른 팀 작품을 하나 써 보고 “써 보니 ___이 좋았어. ___은 어떨까?”라고 말해요.')}
-        ${field('feedback','친구에게 받은 말 또는 친구에게 전한 말','어떤 점이 도움이 되었나요? 더 궁금했던 점은 무엇인가요?')}`;
+        ${talk('선생님이 결과를 공개하면 다른 팀 작품을 써 보고 “써 보니 ___이 좋았어. ___은 어떨까?”라고 말해요. 아직 공개 전이면 조원끼리 이야기해요.')}
+        ${field('feedback','친구에게 받은 말 또는 친구에게 전한 말','공개 전에는 조원의 의견을, 공개 후에는 다른 팀의 의견도 적어요.')}`;
       default: return `<div class="finish-banner"><span class="finish-stamp">생각하고<br>함께 만들었어요</span><div><h3>오늘의 발명은 여기까지!</h3><p>완벽한 도구보다, 이유 있는 선택을 해 본 것이 중요해요.</p></div></div>
         ${field('reflection','짝과 이야기하며 생각이 달라진 순간은?','처음에는 ___라고 생각했는데, 짝의 ___라는 말을 듣고 ___로 바꿨어요.')}
         ${field('nextIdea','시간이 더 있다면 무엇을 바꾸고 싶나요?','친구가 써 본 반응을 떠올려요.')}
         ${talk('서로에게 “네가 ___을 해 줘서 도움이 됐어”라고 말해요.')}
-        <div class="actions"><button class="button primary" id="download">우리 기록 내려받기</button><button class="button secondary" data-copy="record">기록 전체 복사</button></div><p class="small">기록을 저장하거나 Teams로 보내 두면 다음 시간에도 이어 볼 수 있어요. 이 웹의 기록은 두 아이패드 사이에 자동으로 동기화되지 않아요.</p>`;
+        <div class="actions"><button class="button primary" id="download">우리 기록 내려받기</button><button class="button secondary" data-copy="record">기록 전체 복사</button></div><p class="small">기록을 저장하거나 메시지 또는 메모 사본 AirDrop으로 보내 두면 다음 시간에도 이어 볼 수 있어요. 이 웹의 기록은 두 아이패드 사이에 자동으로 동기화되지 않아요.</p>`;
     }
   }
   function padletTitle() { return `${v('className').trim() || '[반]'} · ${v('team').trim() || '[팀 이름]'}`; }
   function padletText() { return `1. 우리가 생각하는 문제\n${v('problem') || '[문제]'}\n이 문제를 고른 이유: ${v('reason') || '[이유]'}\n\n2. 문제를 해결하기 위해 생각한 것\n방법 A: ${v('idea1') || '[방법 A]'}\n방법 B: ${v('idea2') || '[방법 B]'}\n우리가 선택한 방법: ${v('solution') || '[해결 방법]'}\n그렇게 정한 이유: ${v('solutionReason') || '[선택 이유]'}\n\n3. 웹앱 설명\n도구 이름: ${v('appName') || '[도구 이름]'}\n${v('description') || '[누구를 위한 도구인지, 어떻게 사용하는지]'}\n이렇게 써 보세요: ${v('test') || '[시험 순서]'}${v('actual').trim() ? '\n\n4. 1번 아이패드에서 시험한 결과\n' + v('actual') : ''}${v('fix').trim() ? '\n고치기 위해 생각한 것: ' + v('fix') : ''}`; }
+  function safePadletUrl(url) {
+    try { const u = new URL(String(url || '')); if(u.protocol === 'https:' && !u.username && !u.password && (u.hostname === 'padlet.com' || u.hostname.endsWith('.padlet.com') || u.hostname === 'padlet.org' || u.hostname.endsWith('.padlet.org'))) return u.href; } catch {}
+    return '';
+  }
   function padletLink() {
-    const url = String(window.HACKATHON_CONFIG?.padletUrl || '');
-    try { const u = new URL(url); if(u.protocol === 'https:' && (u.hostname === 'padlet.com' || u.hostname.endsWith('.padlet.com') || u.hostname === 'padlet.org' || u.hostname.endsWith('.padlet.org'))) return `<a href="${esc(u.href)}" target="_blank" rel="noopener noreferrer" class="button primary">우리 반 Padlet 열기 ↗</a>`; } catch {}
-    return '<span class="padlet-pending">Padlet 주소는 선생님이 안내해 주세요.</span>';
+    const name = v('className').trim();
+    const links = window.HACKATHON_CONFIG?.padletClassLinks || {};
+    const url = safePadletUrl(Object.hasOwn(links, name) ? links[name] : '');
+    if (url) return `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer" class="button primary">${esc(name)} 제출 양식 열기 ↗</a>`;
+    return '<span class="padlet-pending">Padlet 주소는 선생님이 안내해 주세요. 우리 반을 확인하고 우리 반 제출 양식 링크로 들어가요.</span>';
+  }
+  function padletViewLink() {
+    const url = safePadletUrl(window.HACKATHON_CONFIG?.padletViewUrl);
+    return url ? `<p><a href="${esc(url)}" target="_blank" rel="noopener noreferrer" class="button secondary">5학년 전체 결과 보기 ↗</a></p>` : '';
   }
   function updateGenerated() {
     if ($('prompt-text')) $('prompt-text').value = prompt();
     if ($('padlet-text')) $('padlet-text').value = padletText();
     if ($('padlet-title')) $('padlet-title').value = padletTitle();
+    if ($('padlet-class-link')) $('padlet-class-link').innerHTML = padletLink();
     if ($('missing-fields')) { const missing = required.filter(key => !v(key).trim()).length; $('missing-fields').textContent = missing ? `아직 정하지 않은 항목이 ${missing}개 있어요. 요청문의 [괄호]를 확인해요.` : '모든 항목을 채웠어요! 짝이 읽고 같은 화면을 상상하는지 확인해요.'; }
   }
   function render(focus = false) {
@@ -153,7 +173,7 @@
   }
   let toastTimer;
   function toast(message) { $('toast').textContent = message; $('toast').classList.add('visible'); clearTimeout(toastTimer); toastTimer = setTimeout(() => $('toast').classList.remove('visible'), 4200); }
-  async function copy(text, target, successMessage = '복사했어요. Teams·메시지에 붙여 넣어 보내요.') {
+  async function copy(text, target, successMessage = '복사했어요. 메시지로 보내거나 메모에 붙여 넣어 AirDrop으로 보내요.') {
     if (!text.trim()) { toast('먼저 함께 내용을 적어 주세요.'); return; }
     try { await navigator.clipboard.writeText(text); toast(successMessage); }
     catch {
@@ -171,6 +191,8 @@
     if(key) { state.values[key] = event.target.value; save(); updateGenerated(); }
   });
   document.addEventListener('change', event => {
+    const fieldKey=event.target.dataset.field;
+    if(fieldKey) {state.values[fieldKey]=event.target.value;save();updateGenerated();}
     if(event.target.name==='group-size'){state.values.groupSize=event.target.value;save();render();}
     const key=event.target.dataset.check; if(key) {state.checks[key]=event.target.checked;save();}
   });
@@ -182,10 +204,6 @@
       const texts={'prompt':prompt(),'padlet':padletText(),'padlet-title':padletTitle(),'work-link':v('workUrl'),'fix':v('fix'),'record':record()};
       const targets={'prompt':$('prompt-text'),'padlet':$('padlet-text'),'padlet-title':$('padlet-title')};
       await copy(texts[kind] || '',targets[kind] || null, kind==='padlet'?'내용을 복사했어요. Padlet 내용 칸에 붙여 넣어요.':kind==='padlet-title'?'제목을 복사했어요. Padlet 제목 칸에 붙여 넣어요.':kind==='work-link'?'웹앱 주소를 복사했어요. Padlet에 링크로 첨부해요.':undefined);
-    }
-    if(button.id==='share-prompt') {
-      if(navigator.share) { try { await navigator.share({title:'우리 팀의 Canva 요청문',text:prompt()}); } catch(error) { if(error.name!=='AbortError') {toast('공유를 열지 못했어요. 요청문 복사를 이용해요.');} } }
-      else { await copy(prompt(),$('prompt-text')); }
     }
     if(button.id==='download') {
       const blob = new Blob(['\ufeff'+record()],{type:'text/plain;charset=utf-8'}), url=URL.createObjectURL(blob), a=document.createElement('a');a.href=url;a.download='우리팀-생각기록.txt';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),30000);toast('기록 파일을 저장해요. Safari 다운로드 목록을 확인해요.');
@@ -199,6 +217,6 @@
   $('reset-cancel').onclick=()=>$('reset-dialog').close();
   $('reset-confirm').onclick=()=>{state={step:0,values:{},checks:{}};save();$('reset-dialog').close();render(true);toast('새로운 생각을 시작해요.');};
   $('teacher-schedule').innerHTML=stages.map(([label,min],i)=>`<div class="schedule-row"><span>${i<5?'1':'2'}차시 · ${i+1}. ${label}</span><strong>${min}분</strong></div>`).join('');
-  $('padlet-config-note').textContent=window.HACKATHON_CONFIG?.padletUrl ? 'Padlet 주소가 설정되어 있습니다. 수업 전에 학생 기기에서 게시 권한을 확인하세요.' : 'Padlet 주소 미설정: config.js의 padletUrl에 실제 게시판 주소를 넣어 주세요. 현재 학생 화면에는 교사에게 주소를 안내받으라는 문구가 표시됩니다.';
+  $('padlet-config-note').textContent='config.js의 padletClassLinks에 반별 제출 양식 링크를 넣으세요. 제출 중에는 수동 승인을 켜고 승인을 보류합니다. 교사는 전체 게시판에서 확인하고, 마감 후 승인하여 공개합니다. padletViewUrl은 추후 받은 전체 보기 링크만 넣으세요.';
   render();save();
 })();
