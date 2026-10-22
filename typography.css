@@ -1,0 +1,21 @@
+/* 학생용: iPad 10세대에서 읽고 입력하는 활동의 글자 크기. */
+body{font-size:18px;line-height:1.75}
+.lead{font-size:20px;line-height:1.8;color:var(--ink)}
+h2{font-size:clamp(32px,3.5vw,42px);line-height:1.45}
+h3,.card h3,.three-cards .card h3{font-size:22px;line-height:1.6}
+.card p,.review-grid p,.note,.check,.instruction li,.discussion>div,.finish-banner p,details p,details li,summary,.talk{font-size:18px;line-height:1.85}
+.field-title{font-size:20px;line-height:1.65}.field-hint,.small,.padlet-pending{font-size:16px;line-height:1.85}
+input[type=text],input[type=url],textarea{font-size:20px;line-height:1.8;padding:16px 18px}textarea{min-height:130px}
+.prompt{font-size:18px!important;line-height:1.9;min-height:340px!important}
+.button,.group-picker label{font-size:18px;min-height:54px;padding:14px 20px}
+.text-button,.example-button{font-size:16px;min-height:48px}.group-picker legend{font-size:18px}
+.discussion b{font-size:16px;min-width:92px}.discussion{padding:20px}.check{padding:17px 0}.check input{width:26px;height:26px;margin-top:4px}
+.hero h3{font-size:28px}.hero p{font-size:18px;max-width:78%}.hero{min-height:240px}
+.feature,.feature strong{font-size:18px;line-height:1.85}.feature span:first-child{font-size:16px;min-width:98px}
+.side-intro{font-size:16px}.step-link{font-size:17px;min-height:52px}.step-number{font-size:14px;width:28px;height:28px}.step-minutes{font-size:13px}.nav-divider{font-size:14px;letter-spacing:0}
+.work-top,.pill,.screen-kicker,.tag,.eyebrow{font-size:14px}.work-top{gap:16px;flex-wrap:wrap}.step-footer>span{font-size:16px}
+.side-bottom,.side-bottom button,.storage-note{font-size:14px;line-height:1.8}.storage-note{text-align:left}
+.header-right{gap:18px;flex-wrap:wrap;justify-content:flex-end}.board-link{display:inline-flex;align-items:center;min-height:48px;font-size:16px;font-weight:700;text-underline-offset:5px}.edition{font-size:14px}
+dialog{font-size:18px}dialog li,.schedule-row{font-size:17px;line-height:1.85}dialog h2{font-size:32px}#toast{font-size:17px}
+@media(min-width:651px) and (max-width:1000px){.layout{grid-template-columns:220px minmax(0,1fr)}.sidebar{padding-left:18px;padding-right:14px}.step-link{gap:8px;padding:11px 8px}.sidebar h1{font-size:25px}.cards,.three-cards,.review-grid{grid-template-columns:1fr}.discussion>div{flex-direction:column;gap:3px}.feature{flex-direction:column;gap:4px}.hero h3,.hero p{max-width:100%}.invention{display:none}.hero{min-height:0}.header{padding:16px 22px}.header-right{gap:12px}}
+@media(max-width:650px){.header{align-items:flex-start}.brand{font-size:16px}.header-right{gap:5px;flex-direction:column;align-items:flex-end}.board-link,.header-right .text-button{font-size:14px;min-height:44px}.step-link{font-size:16px;min-height:48px}.step-number{width:25px;height:25px;font-size:13px}.cards,.three-cards{grid-template-columns:1fr}.hero h3{font-size:26px;max-width:100%}.hero p{max-width:100%;font-size:18px}.invention{display:none}.hero{min-height:0}.discussion>div{flex-direction:column;gap:2px}.button,.step-footer .button{font-size:17px;padding:13px 15px}.group-picker label{font-size:17px}.feature{flex-direction:column;gap:4px}.work-top{font-size:14px}.finish-banner{display:block}}

@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>전자칠판 안내 · 우리의 작은 발명실</title>
+  <link rel="stylesheet" href="fonts.css">
+  <link rel="stylesheet" href="teacher.css">
+  <script src="teacher.js" defer></script>
+</head>
+<body>
+  <header><a href="./">✳ 우리의 작은 발명실</a><button id="fullscreen" type="button">전체 화면</button></header>
+  <main>
+    <section class="slide" aria-labelledby="title-1">
+      <p class="kicker">오늘의 도전</p><h1 id="title-1">작은 불편을<br>쓸모 있는 도구로!</h1>
+      <p class="big">친구와 생각하고, AI와 만들어요.</p>
+      <p class="callout">멋진 화면보다 <strong>함께 생각한 과정</strong>이 중요해요.</p>
+    </section>
+    <section class="slide" hidden aria-labelledby="title-2">
+      <p class="kicker">40분 + 40분</p><h1 id="title-2">먼저 생각하고, 그다음 만들어요.</h1>
+      <div class="two-columns"><article><h2>1차시 · 생각</h2><p>불편 찾기 → 해결 방법 비교<br>→ AI에게 보낼 요청문 완성</p></article><article><h2>2차시 · 만들기</h2><p>Canva로 구현 → 직접 시험<br>→ Padlet에서 친구와 나눔</p></article></div>
+      <p class="callout">핵심 기능 <strong>하나</strong>면 충분해요.</p>
+    </section>
+    <section class="slide" hidden aria-labelledby="title-3">
+      <p class="kicker">2명 또는 3명이 한 팀</p><h1 id="title-3">역할은 달라도, 생각은 함께!</h1>
+      <div class="three-columns"><article><h2>1번 아이패드</h2><p>질문 읽기·생각 기록<br>받은 링크로 시험하기</p></article><article><h2>2번 아이패드</h2><p>Canva에서 만들기<br>게시 링크를 1번에게</p></article><article><h2>3번이 있다면</h2><p>다른 질문을 하고<br>1번과 함께 시험</p></article></div>
+      <p class="callout">말하기 어려우면 <strong>가리키거나 그림으로</strong> 알려 줘도 좋아요.</p>
+    </section>
+    <section class="slide" hidden aria-labelledby="title-4">
+      <p class="kicker">우리의 대화 약속</p><h1 id="title-4">내 생각 → 친구 생각 → 함께 결정</h1>
+      <ol class="conversation"><li>불편했던 장면을 한 명씩 말해요.</li><li>“왜?” “다른 방법은?”을 물어봐요.</li><li>무엇을 골랐는지, 이유도 남겨요.</li></ol>
+      <p class="callout">한 사람이 모두 정하지 않아요. <strong>모든 팀원의 생각</strong>을 들어요.</p>
+    </section>
+    <section class="slide" hidden aria-labelledby="title-5">
+      <p class="kicker">프롬프트 = AI에게 보내는 요청문</p><h1 id="title-5">AI가 어떤 도구를 만들면 될까요?</h1>
+      <div class="three-columns"><article><h2>① 입력</h2><p>사용자가 무엇을<br>넣거나 고르나요?</p></article><article><h2>② 행동</h2><p>어떤 버튼을<br>누르나요?</p></article><article><h2>③ 결과</h2><p>화면에 무엇이<br>나와야 하나요?</p></article></div>
+      <p class="callout">“이렇게 해 보니, 이렇게 나오면 성공!”도 정해요.</p>
+    </section>
+    <section class="slide" hidden aria-labelledby="title-6">
+      <p class="kicker">이제 팀별로 시작해요</p><h1 id="title-6">1번 아이패드에서<br>우리 팀의 생각을 모아요.</h1>
+      <p class="big">요청문이 완성되면 Teams·메시지로 2번에게 보내요.</p>
+      <p class="callout">Padlet 제목은 <strong>반·팀 이름</strong>, 링크는 완성한 웹앱 주소!<br>내용은 1번의 기록을 복사해요. 이름·출석번호는 넣지 않아요.</p>
+      <a class="start-link" href="./">학생 활동 화면 열기 →</a>
+    </section>
+  </main>
+  <footer><button id="board-previous" type="button">← 이전</button><span id="board-count" role="status" aria-live="polite">1 / 6</span><button id="board-next" type="button">다음 →</button></footer>
+  <p id="board-status" role="status"></p>
+</body>
+</html>
