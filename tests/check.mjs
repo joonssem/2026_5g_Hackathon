@@ -51,6 +51,17 @@ await app.click({copy:'padlet-title'});
 assert.equal(app.copied,'5학년 1반 · 새싹 발명가');
 await app.click({copy:'work-link'});
 assert.equal(app.copied,values.workUrl);
+// A published URL can exceed the short text fields' 100-character limit.
+const longWorkUrl = 'https://example.canva.site/' + 'published-demo-'.repeat(18);
+assert.ok(longWorkUrl.length > 100);
+assert.match(app.element('screen').innerHTML, /type="url" maxlength="2048" data-field="workUrl"/);
+app.input('workUrl',longWorkUrl);
+await app.click({copy:'work-link'});
+assert.equal(app.copied,longWorkUrl);
+const urlRestored=boot(JSON.parse(app.store.get('little-invention-lab-v1')));
+await urlRestored.click({copy:'work-link'});
+assert.equal(urlRestored.copied,longWorkUrl);
+app.input('workUrl',values.workUrl);
 app.input('className','5학년 2반');
 assert.equal(app.element('padlet-title').value,'5학년 2반 · 새싹 발명가');
 assert.match(app.element('screen').innerHTML,/Padlet 주소는 선생님/);
@@ -58,6 +69,20 @@ app.input('description','수정한 최종 설명');
 assert.match(app.element('padlet-text').value,/수정한 최종 설명/);
 await app.click({copy:'padlet'});
 assert.equal(app.copied,app.element('padlet-text').value);
+
+// Carry the actual test result and the proposed fix through the final submission.
+await app.click({step:'6'});
+app.input('actual','완료를 눌러도 다음 할 일이 표시되지 않았어요.');
+app.input('fix','완료 버튼을 누르면 다음 할 일을 표시해 줘.');
+await app.click({copy:'fix'});
+assert.equal(app.copied,'완료 버튼을 누르면 다음 할 일을 표시해 줘.');
+await app.click({step:'7'});
+assert.ok(app.element('padlet-text').value.includes('완료를 눌러도 다음 할 일이 표시되지 않았어요.'));
+assert.ok(app.element('padlet-text').value.includes('완료 버튼을 누르면 다음 할 일을 표시해 줘.'));
+await app.click({copy:'record'});
+assert.ok(app.copied.includes(values.goal));
+assert.ok(app.copied.includes('완료를 눌러도 다음 할 일이 표시되지 않았어요.'));
+assert.ok(app.copied.includes('완료 버튼을 누르면 다음 할 일을 표시해 줘.'));
 
 app.input('problem','<img src=x onerror=alert(1)>');
 await app.click({step:'7'});

@@ -28,7 +28,7 @@
       const options = [...new Set([...classes, ...(v(key) && !classes.includes(v(key)) ? [v(key)] : [])])];
       return `<label class="field"><span class="field-title">${title}<span class="field-hint">우리 반을 선택해요. 제출 링크도 함께 바뀌어요.</span></span><select data-field="className"><option value="">반을 선택해요</option>${options.map(name => `<option value="${esc(name)}" ${v(key) === name ? 'selected' : ''}>${esc(name)}</option>`).join('')}</select></label>`;
     }
-    return `<label class="field"><span class="field-title">${title}${hint ? `<span class="field-hint">${hint}</span>` : ''}</span>${short ? `<input type="text" maxlength="100" data-field="${key}" value="${esc(v(key))}" placeholder="${esc(placeholder)}">` : `<textarea data-field="${key}" maxlength="700" placeholder="${esc(placeholder)}">${esc(v(key))}</textarea>`}</label>`;
+    return `<label class="field"><span class="field-title">${title}${hint ? `<span class="field-hint">${hint}</span>` : ''}</span>${short ? `<input type="${key === 'workUrl' ? 'url' : 'text'}" maxlength="${key === 'workUrl' ? 2048 : 100}" data-field="${key}" value="${esc(v(key))}" placeholder="${esc(placeholder)}">` : `<textarea data-field="${key}" maxlength="700" placeholder="${esc(placeholder)}">${esc(v(key))}</textarea>`}</label>`;
   }
   function check(key, text) { return `<label class="check"><input type="checkbox" data-check="${key}" ${state.checks[key] ? 'checked' : ''}><span>${text}</span></label>`; }
   const talk = text => `<p class="talk">${text}</p>`;
@@ -70,7 +70,7 @@
         <div class="cards"><article class="card">${field('idea1','해결 방법 A','예: 해야 할 일을 순서대로 보여 줘요.')}</article><article class="card">${field('idea2','해결 방법 B','예: 활동 시간을 정하면 남은 시간을 보여 줘요.')}</article></div>
         ${field('solution','우리가 선택한 해결 방법','예: 해야 할 일을 순서대로 보여 주고, 끝내면 다음 일을 알려 줘요.')}
         ${field('solutionReason','다른 방법보다 이 방법이 나은 이유','사용하기 쉬운가요? 불편을 직접 줄이나요? 한 화면으로 만들 수 있나요?')}
-        <details><summary>너무 커졌다면 이렇게 줄여요</summary><p>기능을 많이 넣기보다 꼭 필요한 기능 하나를 정해요. 로그인, 친구와 실시간 연결, 실제 학교 자료 자동 불러오기는 오늘 범위에서 빼요.</p><p>두 방법을 섞어도 괜찮아요. 어떤 부분을 왜 가져왔는지 짝에게 설명해요.</p></details>${talk('“이 방법을 쓰면 아까 그 불편이 정말 줄어들까?”')}`;
+        <details><summary>너무 커졌다면 이렇게 줄여요</summary><p>우리가 만들 웹 도구에는 꼭 필요한 기능 하나를 정해요. 도구 안에 로그인, 친구와 실시간 연결, 실제 학교 자료 자동 불러오기 기능까지 만들지는 않아요.</p><p>두 방법을 섞어도 괜찮아요. 어떤 부분을 왜 가져왔는지 짝에게 설명해요.</p></details>${talk('“이 방법을 쓰면 아까 그 불편이 정말 줄어들까?”')}`;
       case 4: return `${discussion('사용자가 처음에 무엇을 넣거나 고르나요?','어떤 버튼을 누르면 어떤 결과가 나와야 하나요?','완성된 요청문을 읽고 모호한 말을 고쳐요.')}
         ${field('appName','도구에 이름을 붙여요','예: 모둠 시작 도우미','꾸미기보다 쓰임이 드러나는 이름이면 좋아요.',true)}
         ${field('description','웹앱을 한 문장으로 설명해요','예: 모둠 활동을 시작할 때 할 일을 하나씩 보여 주는 도구예요.','이 설명은 마지막 Padlet 소개글에도 들어가요.')}
@@ -82,9 +82,9 @@
         <h3>우리의 Canva 요청문</h3><p class="small">위 내용을 바꾸면 아래 문장도 함께 바뀌어요. 괄호가 남아 있으면 짝과 더 정해요.</p>
         <textarea id="prompt-text" class="prompt" readonly aria-label="완성된 Canva 요청문">${esc(prompt())}</textarea>
         <div class="actions"><button class="button primary" data-copy="prompt">요청문 복사</button></div>
-        <div class="note"><strong>Canva 공유 문서로 함께 봐요.</strong><ol><li><strong>1번 아이패드:</strong> 학교 계정으로 Canva를 열고 <strong>문서(Docs)</strong>를 만들어요. 제목은 <strong>팀 이름_공유문서</strong>로 정해요.</li><li>문서의 <strong>공유 → 조원 초대</strong>에서 조원의 학교 Canva 계정을 선택하고, 권한을 <strong>편집 가능</strong>으로 정해 초대해요. 3인 팀은 조원 모두를 초대해요.</li><li><strong>2번 아이패드:</strong> 자기 학교 계정에서 초대 알림을 확인하고 같은 문서를 열어요. 짧은 글을 적어 두 화면에 함께 보이는지 확인해요.</li><li>문서에 <strong>요청문 / 실행 링크 / 시험 결과·고칠 점</strong> 칸을 만들어요. 1번이 위의 <strong>요청문 복사</strong>를 눌러 요청문 칸에 붙여 넣어요.</li><li>2번은 같은 문서에서 요청문을 읽고 복사해 Canva Code에 넣어요. 문서를 사본으로 만들지 않고 함께 사용해요.</li></ol><p>이 안내 웹의 기록은 Canva에 자동으로 옮겨지지 않아요. 내용을 고치면 필요한 칸에 다시 붙여 넣어요. 초대나 편집이 안 되면 선생님께 보여 드려요.</p></div>
+        <div class="note"><strong>Canva 공유 문서로 함께 봐요.</strong><ol><li><strong>1번 아이패드:</strong> 학교 계정으로 Canva를 열고 <strong>문서(Docs)</strong>를 만들어요. 제목은 <strong>팀 이름_공유문서</strong>로 정해요. 선생님이 미리 만든 문서가 있으면 그 문서를 열어요.</li><li>문서의 <strong>공유 → 조원 초대</strong>에서 2번의 학교 Canva 계정을 선택하고, 권한을 <strong>편집 가능</strong>으로 정해 초대해요.</li><li><strong>2번 아이패드:</strong> 자기 학교 계정에서 초대 알림을 확인하고 같은 문서를 열어요. 짧은 글을 적어 두 화면에 함께 보이는지 확인해요.</li><li>문서에 <strong>요청문 / 실행 링크 / 시험 결과·고칠 점</strong> 칸을 만들어요. 1번이 위의 <strong>요청문 복사</strong>를 눌러 요청문 칸에 붙여 넣어요.</li><li>2번은 같은 문서에서 요청문을 읽고 복사해 Canva Code에 넣어요. 계속 같은 문서를 사용해요.</li></ol><p>3인 팀의 3번은 1번 아이패드에서 함께 보고 의견을 말해요. 자기 기기도 사용한다면 그 계정도 초대해요.</p><p>이 안내 웹의 기록은 Canva에 자동으로 옮겨지지 않아요. 내용을 고치면 필요한 칸에 다시 붙여 넣어요. 초대나 편집이 안 되면 선생님께 보여 드려요.</p></div>
         ${check('prompt-reviewed','모든 팀원이 요청문을 읽고, 버튼과 결과가 분명한지 확인했어요.')}
-        ${check('prompt-sent','조원 모두 Canva 공유 문서를 열고, 2번 아이패드에서 요청문을 확인했어요.')}
+        ${check('prompt-sent','두 아이패드에서 같은 Canva 공유 문서를 열고, 조원 모두 요청문을 확인했어요.')}
         <p class="talk">짝이 사용자가 되어 순서를 말해 보고, 기록한 학생이 예상 결과를 설명해요. 이제 1차시가 끝나요!</p>`;
       case 5: return `<div class="note"><strong>2차시 시작!</strong> 2번 아이패드에서 만들고, <strong>1번 아이패드에서 시험해요.</strong> 결과는 팀원 모두 함께 판단해요.</div>
         <div class="card canva-location"><h3>Canva AI는 어디에 있나요?</h3><p><strong>Safari로 Canva를 열었다면</strong><br>Canva 홈의 <strong>왼쪽 메뉴 → Canva AI</strong>를 찾아요. 보이지 않으면 <strong>더 보기(More)</strong> 안을 확인해요.</p><p><strong>Canva 앱을 열었다면</strong><br>홈 화면의 <strong>아래쪽 메뉴 → Canva AI</strong>를 찾아요. 없으면 <strong>더 보기(… / More)</strong>를 눌러요.</p><p>Canva AI의 요청문 입력창에서 <strong>코드(&lt;/&gt; Code)</strong>를 선택해요. 홈에 <strong>Code(코드)</strong>가 바로 보이면 그 버튼으로 시작해도 좋아요.</p><p class="small">편집 화면에 있다면 먼저 홈으로 돌아와요. 화면 모양은 계정·버전에 따라 다를 수 있어요. 메뉴가 계속 없으면 선생님께 보여 드려요.</p></div>
@@ -102,7 +102,7 @@
         <div class="actions"><button class="button secondary" data-copy="fix">고치기 요청 복사</button></div>
         <p class="small">복사한 문장은 Canva 공유 문서의 시험 결과·고칠 점 칸에 붙여 넣어요. 2번은 그 문장을 확인해 Canva Code의 같은 대화에서 고치고 다시 게시해요. 잘 작동하면 기능을 더 넣지 않아도 괜찮아요.</p>
         ${check('tested','1번 아이패드에서 실행 링크를 열고 성공 기준대로 시험했어요.')}${check('retested','고쳤다면 2번이 다시 게시하고 1번 아이패드에서 재시험했어요. 또는 고칠 필요가 없었어요.')}${check('readable','1번 아이패드에서 글씨와 버튼이 잘 보이고 눌려요.')}`;
-      case 7: return `<div class="note"><strong>Padlet 게시도 1번 아이패드에서 해요.</strong> 제목에는 <strong>반과 팀 이름</strong>만 적어요. <strong>이름과 출석번호는 넣지 않아요.</strong></div><ol class="instruction"><li>1번 아이패드에서 시험한 최종 링크를 준비해요. 2번이 더 고쳤다면 다시 게시한 뒤 1번에서 재시험해요.</li><li>아래에서 우리 반을 확인하고 <strong>우리 반 제출 양식 링크</strong>로 들어가요. 제출 양식에서 아래 <strong>제목 복사</strong>로 반·팀 이름을 제목 칸에 붙여 넣어요.</li><li><strong>웹앱 링크 복사</strong>로 Canva에서 만든 게시 주소를 Padlet의 링크 첨부에 넣어요. 편집용 주소는 넣지 않아요.</li><li>아래 <strong>내용 복사</strong>를 눌러 1번 아이패드에 모인 활동 내용을 Padlet의 내용 칸에 붙여 넣어요.</li><li>우리 반 섹션인지, 제목·링크·내용이 맞는지 팀원과 확인한 뒤 게시해요.</li></ol>
+      case 7: return `<div class="note"><strong>Padlet 게시도 1번 아이패드에서 해요.</strong> 제목에는 <strong>반과 팀 이름</strong>만 적어요. <strong>이름과 출석번호는 넣지 않아요.</strong></div><ol class="instruction"><li>공유 문서에서 가져온 <strong>1번 아이패드에서 시험한 최종 실행 링크</strong>를 아래 웹앱 주소 칸에 붙여 넣어요. 2번이 더 고쳤다면 다시 게시한 뒤 1번에서 재시험해요.</li><li>이 화면에서 <strong>우리 반·팀 이름·웹앱 주소·내용</strong>과 개인정보가 없는지 먼저 확인해요.</li><li>아래 <strong>우리 반 제출 양식 열기</strong>를 눌러 새 탭으로 열어요. 안내 웹과 양식 탭을 오가며 <strong>제목 복사 → 제목 칸</strong>, <strong>웹앱 링크 복사 → 링크 첨부</strong>, <strong>내용 복사 → 내용 칸</strong>에 하나씩 붙여 넣어요.</li><li>공유 문서의 편집 주소가 아닌 <strong>웹앱의 게시된 실행 주소</strong>인지, 우리 반 양식인지 확인한 뒤 게시해요.</li></ol>
         <h3>① 제목 · 반과 팀 이름</h3>
         ${field('className','우리 반','예: 5학년 1반','이름과 출석번호는 넣지 않아요.',true)}
         ${field('team','우리 팀 이름','예: 초록 톱니','모두 함께 정한 팀 이름만 적어요.',true)}
@@ -117,8 +117,8 @@
         ${check('safe','제목과 내용에 이름·출석번호·사진·연락처가 없는지 확인했어요.')}${check('link-tested','1번 아이패드에서 최종 게시 주소를 열고 직접 눌러 봤어요.')}
         <p>앞에서 이야기하고 기록한 내용이 아래에 모였어요. 복사해 Padlet의 <strong>내용 칸</strong>에 붙여 넣어요.</p><textarea id="padlet-text" class="prompt" readonly aria-label="Padlet 내용">${esc(padletText())}</textarea>
         <div class="actions"><button class="button primary" data-copy="padlet">내용 복사</button><span id="padlet-class-link">${padletLink()}</span></div>
-        <h3>④ 선생님이 공개하면 · 우리 반 작품 감상</h3>
-        <p class="note">제출 중에는 다른 팀의 글이 보이지 않아요. 선생님이 공개를 안내하면 우리 반 소회의실에서 친구의 작품을 살펴봐요. 직접 써 보고 댓글로 좋은 점과 궁금한 점을 남기거나 좋아요를 눌러요.</p>
+        <h3>④ 선생님이 공개하면 · 작품 감상</h3>
+        <p class="note">제출은 우리 반 양식에서 하고, 작품 감상은 <strong>선생님이 공개를 안내한 뒤 별도로 받은 감상 링크</strong>에서 해요. 직접 써 보고 댓글로 좋은 점과 궁금한 점을 남기거나 좋아요를 눌러요.</p>
         <p class="small">작품 감상 링크는 선생님이 따로 안내해요.</p>
         ${padletViewLink()}
         <p class="small">Padlet에 글을 올리는 것은 직접 해요. 이 웹에서 자동으로 게시하지 않아요.</p>
