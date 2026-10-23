@@ -109,7 +109,7 @@
         <input id="padlet-title" type="text" readonly aria-label="Padlet 제목" value="${esc(padletTitle())}">
         <div class="actions"><button class="button secondary" data-copy="padlet-title">제목 복사</button></div>
         <h3>② 링크 · Canva로 만든 웹앱</h3>
-        ${field('workUrl','시험을 마친 최종 웹앱 주소','https://…','Canva에서 게시한 실행 링크를 적어요. Padlet에서 링크 첨부로 넣어요.',true)}
+        ${field('workUrl','시험을 마친 최종 웹앱 주소','https://…','Canva 또는 아래 코드 게시에서 받은 실행 링크를 적어요. Padlet에서 링크 첨부로 넣어요.',true)}
         <div class="actions"><button class="button secondary" data-copy="work-link">웹앱 링크 복사</button></div>
         <h3>③ 내용 · 1번 아이패드의 활동 기록</h3>
         <h3>우리 대화에서 가져온 생각</h3><div class="review-grid"><article class="card"><span class="tag">우리가 생각한 문제</span><p>${esc(v('problem')||'아직 문제를 적지 않았어요.')}</p><p class="small">고른 이유: ${esc(v('reason')||'아직 기록하지 않았어요.')}</p><button class="text-button" data-step="2">문제와 이유 보완하기 ↗</button></article><article class="card"><span class="tag">해결하기 위해 생각한 것</span><p>A · ${esc(v('idea1')||'아직 기록하지 않았어요.')}</p><p>B · ${esc(v('idea2')||'아직 기록하지 않았어요.')}</p><p>선택: ${esc(v('solution')||'아직 기록하지 않았어요.')}</p><p class="small">이유: ${esc(v('solutionReason')||'아직 기록하지 않았어요.')}</p><button class="text-button" data-step="3">해결 과정 보완하기 ↗</button></article></div>
@@ -122,7 +122,7 @@
         <p class="small">작품 감상 링크는 선생님이 따로 안내해요.</p>
         ${padletViewLink()}
         <p class="small">Padlet에 글을 올리는 것은 직접 해요. 이 웹에서 자동으로 게시하지 않아요.</p>
-        <details><summary>게시가 안 되면요?</summary><p>선생님께 요청해요. 개인정보 없는 화면과 “이렇게 움직이게 만들고 싶었어요”라는 설명으로 나눠도 괜찮아요. 편집 권한이 있는 링크를 대신 공개하지 않아요.</p></details>
+        <details id="publish-help"><summary>게시가 안 되면요?</summary><div id="code-publisher"></div><p class="small">코드를 복사할 수 없으면 선생님께 요청해요. 개인정보 없는 화면과 설명으로 나눠도 괜찮아요. 편집 권한이 있는 링크를 대신 공개하지 않아요.</p></details>
         ${talk('선생님이 결과를 공개하면 다른 팀 작품을 써 보고 “써 보니 ___이 좋았어. ___은 어떨까?”라고 말해요. 아직 공개 전이면 조원끼리 이야기해요.')}
         ${field('feedback','친구에게 받은 말 또는 친구에게 전한 말','공개 전에는 조원의 의견을, 공개 후에는 다른 팀의 의견도 적어요.')}`;
       default: return `<div class="finish-banner"><span class="finish-stamp">생각하고<br>함께 만들었어요</span><div><h3>오늘의 발명은 여기까지!</h3><p>완벽한 도구보다, 이유 있는 선택을 해 본 것이 중요해요.</p></div></div>
@@ -169,8 +169,21 @@
     $('next').disabled = state.step === 8;
     $('step-count').textContent = `${state.step+1} / ${stages.length}`;
     updateGenerated();
+    mountPublisher();
     if(focus) { $('workspace').focus({ preventScroll: true }); window.scrollTo({top:0,behavior:'instant'}); }
   }
+  function mountPublisher() {
+    window.WorkPublisher?.mount($('code-publisher'), {
+      get: v,
+      setUrl(url) {
+        state.values.workUrl = url; save();
+        const input = document.querySelector('[data-field="workUrl"]');
+        if(input) input.value = url;
+        updateGenerated();
+      },
+    });
+  }
+  document.addEventListener('publisher-ready', mountPublisher);
   let toastTimer;
   function toast(message) { $('toast').textContent = message; $('toast').classList.add('visible'); clearTimeout(toastTimer); toastTimer = setTimeout(() => $('toast').classList.remove('visible'), 4200); }
   async function copy(text, target, successMessage = '복사했어요. Canva 공유 문서의 알맞은 칸에 붙여 넣어요.') {

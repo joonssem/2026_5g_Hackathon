@@ -123,6 +123,8 @@ node tests/teacher.mjs
 
 ## GitHub Pages 배포
 
+Canva 게시 오류 시 학생 코드 게시 기능은 [코드 게시 운영 안내](docs/public/STUDENT_CODE_PUBLISHING.md)를 참고합니다. 08단계의 **게시가 안 되면요?** 안에서 코드를 붙여 넣고 미리보기·게시 후 실행 링크를 받습니다. Supabase 프로젝트와 참여 코드 설정이 필요하며, 무료 프로젝트 일시 중지 중에는 기존 작품 링크도 열리지 않습니다.
+
 GitHub 저장소에 이 폴더의 파일을 푸시하고 **Settings → Pages → Deploy from a branch → main / (root)**를 선택합니다. 최초 설정 후 main에 푸시하면 갱신됩니다. 모든 내부 경로는 상대 경로여서 저장소 하위 주소에서 동작합니다. `.nojekyll`을 포함합니다.
 
 `git remote -v`로 로컬 원격 연결을 확인합니다. 현재 로컬에는 `origin`이 등록되어 있지 않으므로, 아래 예시의 저장소 HTTPS 주소를 실제 대상 주소로 바꿔 푸시합니다. `docs/private/`는 업로드에서 제외합니다.

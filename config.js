@@ -7,4 +7,9 @@ window.HACKATHON_CONFIG = {
     "5학년 4반": "https://padlet.com/gocheok/submission-request/8wOpvY209GoWb6AY?section=399022544",
   },
   padletViewUrl: "",
+  // 브라우저 공개용 키만 사용합니다. secret/service_role 키는 넣지 않습니다.
+  publishing: {
+    url: "https://fsilmeeqxasnstepghfn.supabase.co",
+    publishableKey: "sb_publishable_yNjd6ihIQpVxg36uCn4eYA_SAt3vkyZ",
+  },
 };
