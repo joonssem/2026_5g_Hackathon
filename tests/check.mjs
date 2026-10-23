@@ -41,7 +41,8 @@ assert.match(app.element('missing-fields').textContent,/모든 항목/);
 await app.click({copy:'prompt'});
 assert.equal(app.copied,app.element('prompt-text').value);
 assert.doesNotMatch(app.element('screen').innerHTML,/share-prompt|Teams/);
-assert.match(app.element('screen').innerHTML,/사본 보내기 → AirDrop/);
+assert.match(app.element('screen').innerHTML,/Canva 공유 문서/);
+assert.match(app.element('screen').innerHTML,/편집 가능/);
 await app.click({step:'7'});
 for(const key of ['problem','reason','idea1','idea2','solution','solutionReason','description'])assert.ok(app.element('padlet-text').value.includes(values[key]),key);
 assert.equal(app.element('padlet-title').value,'5학년 1반 · 새싹 발명가');
@@ -92,8 +93,12 @@ const configured = {window:{}};
 vm.runInNewContext(readFileSync(new URL('../config.js',import.meta.url),'utf8'),configured);
 const classroom=boot(null,false,configured.window.HACKATHON_CONFIG);
 await classroom.click({step:'7'});
-assert.deepEqual(Object.keys(configured.window.HACKATHON_CONFIG.padletClassLinks), []);
+assert.equal(Object.keys(configured.window.HACKATHON_CONFIG.padletClassLinks).length, 4);
 assert.match(classroom.element('screen').innerHTML, /Padlet 주소는 선생님/);
+for (const [name, link] of Object.entries(configured.window.HACKATHON_CONFIG.padletClassLinks)) {
+  classroom.events.change({target:{dataset:{field:'className'},value:name}});
+  assert.ok(classroom.element('padlet-class-link').innerHTML.includes(`href="${link}"`));
+}
 assert.doesNotMatch(classroom.element('screen').innerHTML,/breakout-room\//);
 assert.equal(configured.window.HACKATHON_CONFIG.padletClassViewLinks,undefined);
 assert.doesNotMatch(classroom.element('screen').innerHTML,/5학년 전체 결과 보기/);

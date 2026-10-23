@@ -26,5 +26,6 @@ for(const match of html.matchAll(/(?:src|href)="([^"#]+\.(?:css|js))"/g))assert.
 const last=html.slice(html.indexOf('aria-labelledby="title-6"'));
 assert.match(last, /href="\.\/"/);
 assert.doesNotMatch(html,/Teams/);
-assert.doesNotMatch(html, /student-page-qr\.svg/);
+assert.match(last, /assets\/student-page-qr\.svg/);
+assert.ok(existsSync(new URL('../assets/student-page-qr.svg',import.meta.url)));
 console.log('PASS: 전자칠판 6장, 단일 화면 표시, 처음·끝 이동 제한, 키보드 이동, 전체 화면 미지원 안내, 참조 파일');

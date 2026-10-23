@@ -82,25 +82,25 @@
         <h3>우리의 Canva 요청문</h3><p class="small">위 내용을 바꾸면 아래 문장도 함께 바뀌어요. 괄호가 남아 있으면 짝과 더 정해요.</p>
         <textarea id="prompt-text" class="prompt" readonly aria-label="완성된 Canva 요청문">${esc(prompt())}</textarea>
         <div class="actions"><button class="button primary" data-copy="prompt">요청문 복사</button></div>
-        <div class="note"><strong>2번 아이패드로 보내는 방법은 두 가지예요.</strong><ol><li><strong>아이패드 메시지:</strong> 복사한 요청문을 메시지 앱에 붙여 넣고 조원에게 보내요.</li><li><strong>아이패드 메모 + AirDrop:</strong> 메모 앱에 요청문을 붙여 넣고, 공유에서 <strong>사본 보내기 → AirDrop</strong>으로 조원에게 보내요. 받은 메모에서 글을 복사해요.</li></ol></div>
+        <div class="note"><strong>Canva 공유 문서로 함께 봐요.</strong><ol><li><strong>1번 아이패드:</strong> 학교 계정으로 Canva를 열고 <strong>문서(Docs)</strong>를 만들어요. 제목은 <strong>팀 이름_공유문서</strong>로 정해요.</li><li>문서의 <strong>공유 → 조원 초대</strong>에서 조원의 학교 Canva 계정을 선택하고, 권한을 <strong>편집 가능</strong>으로 정해 초대해요. 3인 팀은 조원 모두를 초대해요.</li><li><strong>2번 아이패드:</strong> 자기 학교 계정에서 초대 알림을 확인하고 같은 문서를 열어요. 짧은 글을 적어 두 화면에 함께 보이는지 확인해요.</li><li>문서에 <strong>요청문 / 실행 링크 / 시험 결과·고칠 점</strong> 칸을 만들어요. 1번이 위의 <strong>요청문 복사</strong>를 눌러 요청문 칸에 붙여 넣어요.</li><li>2번은 같은 문서에서 요청문을 읽고 복사해 Canva Code에 넣어요. 문서를 사본으로 만들지 않고 함께 사용해요.</li></ol><p>이 안내 웹의 기록은 Canva에 자동으로 옮겨지지 않아요. 내용을 고치면 필요한 칸에 다시 붙여 넣어요. 초대나 편집이 안 되면 선생님께 보여 드려요.</p></div>
         ${check('prompt-reviewed','모든 팀원이 요청문을 읽고, 버튼과 결과가 분명한지 확인했어요.')}
-        ${check('prompt-sent','2번 아이패드에서 요청문을 받았어요.')}
+        ${check('prompt-sent','조원 모두 Canva 공유 문서를 열고, 2번 아이패드에서 요청문을 확인했어요.')}
         <p class="talk">짝이 사용자가 되어 순서를 말해 보고, 기록한 학생이 예상 결과를 설명해요. 이제 1차시가 끝나요!</p>`;
       case 5: return `<div class="note"><strong>2차시 시작!</strong> 2번 아이패드에서 만들고, <strong>1번 아이패드에서 시험해요.</strong> 결과는 팀원 모두 함께 판단해요.</div>
         <div class="card canva-location"><h3>Canva AI는 어디에 있나요?</h3><p><strong>Safari로 Canva를 열었다면</strong><br>Canva 홈의 <strong>왼쪽 메뉴 → Canva AI</strong>를 찾아요. 보이지 않으면 <strong>더 보기(More)</strong> 안을 확인해요.</p><p><strong>Canva 앱을 열었다면</strong><br>홈 화면의 <strong>아래쪽 메뉴 → Canva AI</strong>를 찾아요. 없으면 <strong>더 보기(… / More)</strong>를 눌러요.</p><p>Canva AI의 요청문 입력창에서 <strong>코드(&lt;/&gt; Code)</strong>를 선택해요. 홈에 <strong>Code(코드)</strong>가 바로 보이면 그 버튼으로 시작해도 좋아요.</p><p class="small">편집 화면에 있다면 먼저 홈으로 돌아와요. 화면 모양은 계정·버전에 따라 다를 수 있어요. 메뉴가 계속 없으면 선생님께 보여 드려요.</p></div>
-        <ol class="instruction"><li>2번 아이패드의 메시지 또는 AirDrop으로 받은 메모에서 요청문을 복사해요.</li><li>학교에서 준비한 계정으로 Canva를 열고, 위 안내대로 <strong>Canva AI → 코드</strong>로 들어가요.</li><li>요청문을 붙여 넣고 보내요. 기다리는 동안 성공 기준을 함께 읽어요.</li><li>미리보기가 나오면 디자인 이름을 <strong>팀 이름_도구 이름</strong>으로 정해요.</li><li>실명·사진·연락처가 없는지 확인하고, 선생님 안내에 따라 <strong>웹사이트로 게시</strong>해요.</li><li><strong>게시된 실행 링크</strong>를 복사해 메시지 또는 메모 사본 AirDrop로 1번에게 보내요. 편집용 링크는 보내지 않아요.</li></ol>
+        <ol class="instruction"><li>2번 아이패드에서 조원과 함께 쓰는 <strong>Canva 공유 문서</strong>를 열고 요청문 칸의 글을 복사해요.</li><li>같은 학교 계정으로 Canva 홈을 열고, 위 안내대로 <strong>Canva AI → 코드</strong>로 들어가요.</li><li>요청문을 붙여 넣고 보내요. 기다리는 동안 성공 기준을 함께 읽어요.</li><li>미리보기가 나오면 디자인 이름을 <strong>팀 이름_도구 이름</strong>으로 정해요.</li><li>실명·사진·연락처가 없는지 확인하고, 선생님 안내에 따라 <strong>웹사이트로 게시</strong>해요.</li><li><strong>게시된 실행 링크</strong>를 복사해 공유 문서의 <strong>실행 링크</strong> 칸에 붙여 넣어요. 1번은 같은 문서에서 확인해요. 이 칸에는 웹앱의 게시 주소를 넣어요.</li></ol>
         <a class="button primary" href="https://www.canva.com/" target="_blank" rel="noopener noreferrer">Canva 열기 ↗</a>
         <details><summary>Canva가 질문하면 어떻게 답하나요?</summary><p>짝과 먼저 이야기하고, 앞에서 정한 기준으로 답해요. 기능이 너무 많아지면 “오늘은 핵심 기능 하나만 만들어 줘”라고 말해요.</p></details>
         <details><summary>코드 메뉴가 없거나 생성이 안 돼요</summary><p>선생님께 화면을 보여 드려요. 계정의 권한·사용량을 확인해야 할 수 있어요. 기다리면서 입력·버튼·결과 화면을 종이에 그려도 좋아요. 요청을 여러 번 연속으로 보내지 않아요.</p></details>
-        ${check('generated','2번 아이패드에서 도구를 만들고 게시했어요.')}${check('test-link-sent','게시된 실행 링크를 1번 아이패드로 보냈어요.')}${talk('처음 생각과 다르게 나온 부분은 어디인가요?')}`;
-      case 6: return `<div class="note"><strong>시험은 1번 아이패드에서 해요.</strong> 2번 아이패드는 Canva에서 고칠 때 사용해요. 안내 웹은 닫지 않고, 받은 실행 링크를 새 탭에서 열어요.</div>
-        <ol class="instruction"><li><strong>1번 아이패드</strong>에서 메시지 또는 메모 사본 AirDrop로 받은 실행 링크를 열어요.</li><li>아래 성공 기준대로 직접 눌러 보고, 실제 결과를 살펴봐요.</li><li>이 안내 웹의 탭으로 돌아와 결과와 고칠 점을 적어요.</li><li>고칠 요청을 2번에게 보내요. 2번이 Canva에서 수정하고 <strong>게시 내용을 갱신</strong>한 뒤 실행 링크를 다시 보내요.</li><li>1번 아이패드에서 받은 링크를 다시 열거나 새로고침하고, 같은 순서로 재시험해요.</li></ol>
+        ${check('generated','2번 아이패드에서 도구를 만들고 게시했어요.')}${check('test-link-sent','공유 문서에 실행 링크를 적고 1번 아이패드에서 확인했어요.')}${talk('처음 생각과 다르게 나온 부분은 어디인가요?')}`;
+      case 6: return `<div class="note"><strong>시험은 1번 아이패드에서 해요.</strong> 2번 아이패드는 Canva에서 고칠 때 사용해요. 안내 웹은 닫지 않고, 공유 문서의 실행 링크를 새 탭에서 열어요.</div>
+        <ol class="instruction"><li><strong>1번 아이패드</strong>에서 Canva 공유 문서의 <strong>실행 링크</strong>를 새 탭으로 열어요.</li><li>아래 성공 기준대로 직접 눌러 보고, 실제 결과를 살펴봐요.</li><li>이 안내 웹의 탭으로 돌아와 결과와 고칠 점을 적어요. 공유 문서의 <strong>시험 결과·고칠 점</strong> 칸에도 옮겨 적어요.</li><li>2번은 공유 문서의 요청을 확인해 Canva Code에서 수정하고 <strong>게시 내용을 갱신</strong>해요. 주소가 바뀌면 공유 문서의 실행 링크도 바꿔요.</li><li>1번 아이패드에서 공유 문서의 실행 링크를 다시 열거나 새로고침하고, 같은 순서로 재시험해요.</li></ol>
         <div class="card"><span class="tag">우리의 성공 기준</span><p>${esc(v('test') || '5단계에서 시험할 순서를 적어 주세요.')}</p></div>
         ${discussion(`${isThree() ? '3번이 1번과 함께 1번 아이패드에서' : '1번이 자기 아이패드에서'} 성공 기준대로 직접 눌러 봐요.`,'2번은 사용자가 실제로 어떻게 쓰는지 보고 예상과 비교해요.','고칠 점 하나를 정하고 1번 아이패드에서 다시 시험해요.')}
         ${field('actual','직접 시험하니 어떤 일이 일어났나요?','예: 완료를 눌러도 첫 할 일만 계속 보여요. 예상과 같았다면 무엇이 같았는지 적어요.')}
         ${field('fix','무엇 하나를 어떻게 고칠까요?','예: [완료]를 누르면 다음 할 일로 넘어가게 고쳐 줘. 다른 기능은 그대로 둬.')}
         <div class="actions"><button class="button secondary" data-copy="fix">고치기 요청 복사</button></div>
-        <p class="small">복사한 문장은 메시지 또는 메모 사본 AirDrop로 2번에게 전달해요. 2번은 Canva의 같은 대화에서 고치고, 수정 사항을 다시 게시해요. 잘 작동하면 기능을 더 넣지 않아도 괜찮아요.</p>
+        <p class="small">복사한 문장은 Canva 공유 문서의 시험 결과·고칠 점 칸에 붙여 넣어요. 2번은 그 문장을 확인해 Canva Code의 같은 대화에서 고치고 다시 게시해요. 잘 작동하면 기능을 더 넣지 않아도 괜찮아요.</p>
         ${check('tested','1번 아이패드에서 실행 링크를 열고 성공 기준대로 시험했어요.')}${check('retested','고쳤다면 2번이 다시 게시하고 1번 아이패드에서 재시험했어요. 또는 고칠 필요가 없었어요.')}${check('readable','1번 아이패드에서 글씨와 버튼이 잘 보이고 눌려요.')}`;
       case 7: return `<div class="note"><strong>Padlet 게시도 1번 아이패드에서 해요.</strong> 제목에는 <strong>반과 팀 이름</strong>만 적어요. <strong>이름과 출석번호는 넣지 않아요.</strong></div><ol class="instruction"><li>1번 아이패드에서 시험한 최종 링크를 준비해요. 2번이 더 고쳤다면 다시 게시한 뒤 1번에서 재시험해요.</li><li>아래에서 우리 반을 확인하고 <strong>우리 반 제출 양식 링크</strong>로 들어가요. 제출 양식에서 아래 <strong>제목 복사</strong>로 반·팀 이름을 제목 칸에 붙여 넣어요.</li><li><strong>웹앱 링크 복사</strong>로 Canva에서 만든 게시 주소를 Padlet의 링크 첨부에 넣어요. 편집용 주소는 넣지 않아요.</li><li>아래 <strong>내용 복사</strong>를 눌러 1번 아이패드에 모인 활동 내용을 Padlet의 내용 칸에 붙여 넣어요.</li><li>우리 반 섹션인지, 제목·링크·내용이 맞는지 팀원과 확인한 뒤 게시해요.</li></ol>
         <h3>① 제목 · 반과 팀 이름</h3>
@@ -129,7 +129,7 @@
         ${field('reflection','짝과 이야기하며 생각이 달라진 순간은?','처음에는 ___라고 생각했는데, 짝의 ___라는 말을 듣고 ___로 바꿨어요.')}
         ${field('nextIdea','시간이 더 있다면 무엇을 바꾸고 싶나요?','친구가 써 본 반응을 떠올려요.')}
         ${talk('서로에게 “네가 ___을 해 줘서 도움이 됐어”라고 말해요.')}
-        <div class="actions"><button class="button primary" id="download">우리 기록 내려받기</button><button class="button secondary" data-copy="record">기록 전체 복사</button></div><p class="small">기록을 저장하거나 메시지 또는 메모 사본 AirDrop으로 보내 두면 다음 시간에도 이어 볼 수 있어요. 이 웹의 기록은 두 아이패드 사이에 자동으로 동기화되지 않아요.</p>`;
+        <div class="actions"><button class="button primary" id="download">우리 기록 내려받기</button><button class="button secondary" data-copy="record">기록 전체 복사</button></div><p class="small">기록 전체를 복사해 Canva 공유 문서에 붙여 넣으면 다음 시간에도 함께 볼 수 있어요. 이 웹의 기록은 두 아이패드나 Canva 문서에 자동으로 동기화되지 않아요.</p>`;
     }
   }
   function padletTitle() { return `${v('className').trim() || '[반]'} · ${v('team').trim() || '[팀 이름]'}`; }
@@ -173,7 +173,7 @@
   }
   let toastTimer;
   function toast(message) { $('toast').textContent = message; $('toast').classList.add('visible'); clearTimeout(toastTimer); toastTimer = setTimeout(() => $('toast').classList.remove('visible'), 4200); }
-  async function copy(text, target, successMessage = '복사했어요. 메시지로 보내거나 메모에 붙여 넣어 AirDrop으로 보내요.') {
+  async function copy(text, target, successMessage = '복사했어요. Canva 공유 문서의 알맞은 칸에 붙여 넣어요.') {
     if (!text.trim()) { toast('먼저 함께 내용을 적어 주세요.'); return; }
     try { await navigator.clipboard.writeText(text); toast(successMessage); }
     catch {
