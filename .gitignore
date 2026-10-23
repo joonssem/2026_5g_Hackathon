@@ -3,3 +3,9 @@ node_modules/
 Thumbs.db
 scratch/
 *.log
+
+# Only the documentation index and explicitly public documents belong on GitHub.
+/docs/*
+!/docs/README.md
+!/docs/public/
+/docs/private/

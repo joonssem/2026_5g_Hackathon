@@ -78,7 +78,7 @@ python -m http.server 8025 --bind 127.0.0.1
 
 전자칠판 마지막 장의 학생 접속 QR코드(`assets/student-page-qr.svg`)와 실제 학생 활동 주소도 수업 운영을 위해 유지합니다.
 
-학생 교육용 계정으로 Canva Docs 조원 초대·공동 편집, Code 생성·게시, Padlet 게시·댓글을 실제 iPad 10세대에서 먼저 확인합니다. 자세한 운영은 [교사 안내](docs/TEACHER_GUIDE.md)를 참고합니다.
+학생 교육용 계정으로 Canva Docs 조원 초대·공동 편집, Code 생성·게시, Padlet 게시·댓글을 실제 iPad 10세대에서 먼저 확인합니다. 자세한 운영은 [교사 안내](docs/public/TEACHER_GUIDE.md)를 참고합니다.
 
 학교 Wi-Fi 접속, Canva AI 권한·사용량, Padlet 접근 범위·게시·댓글 권한도 확인합니다. 실제 기기에서 공유·붙여넣기와 기록 다운로드를 시험합니다.
 
@@ -91,9 +91,11 @@ python -m http.server 8025 --bind 127.0.0.1
 - `teacher.html`, `teacher.css`, `teacher.js`: 65인치 전자칠판용 6장 안내, 전체 화면·키보드 이동
 - `fonts.css`: 사용자 지정 Ria 제목 글꼴, Paperozi 본문 글꼴
 - `config.js`: 반별 제출 양식(`padletClassLinks`), 추후 전체 보기(`padletViewUrl`) 링크. 반별 소회의실 주소는 공개 저장소에 보관하지 않고 교사에게 별도 안내합니다.
-- `docs/DESIGN_LOG.md`: 요구사항·설계 판단·제작 기록
-- `docs/TEACHER_GUIDE.md`: 80분 수업 운영
-- `docs/VALIDATION.md`: 검증 결과와 남은 확인
+- `docs/README.md`: 문서별 공개·로컬 보관 기준
+- `docs/public/DESIGN_LOG.md`: 공개용 요구사항·설계 판단·제작 기록
+- `docs/public/TEACHER_GUIDE.md`: 공개용 80분 수업 운영
+- `docs/public/VALIDATION.md`: 공개용 검증 결과와 남은 확인
+- `docs/private/`: 설문·조 편성 등 로컬 보관용 자료. GitHub 업로드 제외
 - `tests/check.mjs`: 학생 활동·기록·복사·Padlet 연결 검사
 - `tests/teacher.mjs`: 전자칠판 안내 화면 이동·전체 화면 대안 검사
 
@@ -112,7 +114,7 @@ node tests/check.mjs
 node tests/teacher.mjs
 ```
 
-두 테스트는 상태와 이벤트 동작을 검사하며 실제 브라우저 렌더링 검사는 아닙니다. 실제 iPad Safari와 65인치 전자칠판의 가독성, 학교 계정에서의 Canva 생성·게시와 Padlet 게시 확인이 필요합니다. 자세한 범위는 [검증 기록](docs/VALIDATION.md)을 참고합니다.
+두 테스트는 상태와 이벤트 동작을 검사하며 실제 브라우저 렌더링 검사는 아닙니다. 실제 iPad Safari와 65인치 전자칠판의 가독성, 학교 계정에서의 Canva 생성·게시와 Padlet 게시 확인이 필요합니다. 자세한 범위는 [검증 기록](docs/public/VALIDATION.md)을 참고합니다.
 
 ## GitHub Pages 배포
 
