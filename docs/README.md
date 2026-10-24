@@ -8,6 +8,7 @@ GitHub에 올릴 문서는 `public/`, 올리지 않을 자료는 `private/`에 �
 | GitHub 공개 | `public/DESIGN_LOG.md` | 앱 설계와 제작 기록 |
 | GitHub 공개 | `public/VALIDATION.md` | 검증 결과와 확인할 항목 |
 | GitHub 공개 | `public/REVIEW_2026-10-23.md` | 개인정보·구조·수업 흐름·문서 일관성 점검 결과 |
+| GitHub 공개 | [public/RETROSPECTIVE_2026-10-24.md](public/RETROSPECTIVE_2026-10-24.md) | 활동 종료 후 현장 관찰과 다음 유사 행사 개선 후보 |
 | 로컬 보관 | `private/SURVEY_RESULTS.md` | 현재는 익명 설문 집계. 학급 자료로 분류하여 업로드 제외 |
 | 로컬 보관 | `private/SURVEY_GROUPS.md` | 현재는 일반 조 편성 기준. 조 편성 관련 자료로 분류하여 업로드 제외 |
 

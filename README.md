@@ -100,6 +100,7 @@ python -m http.server 8025 --bind 127.0.0.1
 - `docs/public/TEACHER_GUIDE.md`: 공개용 80분 수업 운영
 - `docs/public/VALIDATION.md`: 공개용 검증 결과와 남은 확인
 - `docs/public/REVIEW_2026-10-23.md`: 개인정보·구조·수업 흐름·상충 내용 점검 결과
+- [활동 종료 후 수업 리뷰](docs/public/RETROSPECTIVE_2026-10-24.md): Canva 게시·Padlet 입력·설명과 입력 부담에 대한 현장 관찰 및 다음 행사 개선 후보
 - `docs/private/`: 설문·조 편성 등 로컬 보관용 자료. GitHub 업로드 제외
 - `tests/check.mjs`: 학생 활동·기록·복사·Padlet 연결 검사
 - `tests/teacher.mjs`: 전자칠판 안내 화면 이동·전체 화면 대안 검사
